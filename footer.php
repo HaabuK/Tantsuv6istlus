@@ -1,0 +1,1 @@
+<footer><a class="<?=($_REQUEST["page"]??"")=="admin"?"active":""?>" href="?page=admin">Admin</a></footer>
