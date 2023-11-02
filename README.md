@@ -1,5 +1,5 @@
 # Tantsuvõistlus
- Veebirakenduste projekt. Projektis osalevad Karl Haabu ja Viljar Nornan
+ Veebirakenduste projekt. Projektis osalevad Karl Haabu ja Viljar Norman
 
 Tantsuvõistluse Üldkirjeldus
 
