@@ -1,6 +1,8 @@
-<?php define("TITLE","Avaleht"); ?>
-<h1>Tantsuvõistlus</h1>
-
+<?php
+$kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY punkte DESC");
+  $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
+  $kask->execute();
+?>
 <?php 
 if (isset($_REQUEST["addedValue"])){
     ?>
@@ -11,20 +13,25 @@ if (isset($_REQUEST["addedValue"])){
 <?php
 }
 ?>
-<table>
+<body>
+  <h1>Top 5 võistluspaari:</h1>
   <?php
-  $kask=$yhendus->prepare("SELECT id, naine, mees, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY punkte DESC");
-  $kask->bind_result($id, $naine, $mees, $hinne1, $hinne2, $hinne3, $punkte);
-  $kask->execute();
-  echo "<br> Top 5 paari<br>"
   $koht = 1;
-  for(5){
-  echo "<tr>
-  <td style='color: white; padding-right:40px; font-size: 30px'>Paar: $naine ja $mees </td> 
-  <td style='color: white; padding-right:40px; font-size: 30px'>Kokku punkte: $punkte</td>
-  <td style='color: white; padding-right:40px; font-size: 30px'>Koht: $koht</td>
-  </tr>";
-  $koht += 1;
-  }
+  while($kask->fetch()){
+    // if ($koht > 5){
+    //   break
+    // }
+    // else {
+      echo "<tr>
+      <td style='color: white; padding-right:40px; font-size: 30px'>Paar: $tantsija1 ja $tantsija2 </td> 
+      <td style='color: white; padding-right:40px; font-size: 30px'>Kokku punkte: $punkte</td>
+      <td style='color: white; padding-right:40px; font-size: 30px'>Positsioon: $koht</td>
+      </tr><br>";
+      $koht += 1;
+    }
+  // }
   ?>
-  </table>
+</body>
+<?php
+$yhendus->close();
+?>

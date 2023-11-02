@@ -2,6 +2,12 @@
 require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
 global $yhendus;
 
+?>
+<style>
+<?php include 'style.css';
+?>
+</style>
+<?php 
 include("header.php");
 
 if(isset($_REQUEST["page"])){
