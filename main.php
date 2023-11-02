@@ -13,7 +13,8 @@ if (isset($_REQUEST["addedValue"])){
 }
 ?>
 <body>
-  <h1>Top 5 võistluspaari:</h1>
+  <h1 style="color: white; text-align: center">Top 5:</h1>
+  <table style="width: 60%; margin: 0 auto; background-color: #fff">
   <?php
   $koht = 1;
   while($kask->fetch()){
@@ -22,12 +23,13 @@ if (isset($_REQUEST["addedValue"])){
     // }
     // else {
       echo "<tr>
-      <td style='color: white; padding-right:40px; font-size: 30px'>Paar: $tantsija1 ja $tantsija2 </td> 
-      <td style='color: white; padding-right:40px; font-size: 30px'>Kokku punkte: $punkte</td>
-      <td style='color: white; padding-right:40px; font-size: 30px'>Positsioon: $koht</td>
+      <th style='background-color: #333; color: #fff; font-weight: bold;'>Paar: $tantsija1 ja $tantsija2 </th> 
+      <th style='background-color: #333; color: #fff; font-weight: bold;'>Kokku punkte: $punkte</th>
+      <th style='background-color: #333; color: #fff; font-weight: bold;'>Positsioon: $koht</th>
       </tr><br>";
       $koht += 1;
     }
   // }
   ?>
+  </table>
 </body>

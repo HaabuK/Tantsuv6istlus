@@ -7,11 +7,12 @@ body{
   overflow-x: hidden;
   overflow-y: hidden;
   
+  background-image: url("taust1_hambo.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
   }
-  .sisukiht{
+  #sisukiht{
   direction: flex;
   float:center;
   padding-top: 40px;
@@ -22,7 +23,7 @@ body{
   display: flex;
   height:100%;
   }
-  .menyykiht{
+  #menyykiht{
   float: left;
   padding-top: 40px;
   padding-right: 30px;
@@ -143,7 +144,6 @@ input[type=submit]:hover {
 
 div {
     border-radius: 5px;
-    background-color: #f2f2f2;
     padding: 20px;
 }
 
@@ -171,6 +171,13 @@ div {
 table {
     border-collapse: collapse;
     width: 100%;
+}
+
+table tr:nth-child(odd) {
+  background-color:rgba(0, 0, 0, .5);;
+}
+table tr:nth-child(even) {
+  background-color:rgba(0, 0, 0, .9);;
 }
 
 th,
