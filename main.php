@@ -2,8 +2,7 @@
 $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY punkte DESC");
   $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
   $kask->execute();
-?>
-<?php 
+
 if (isset($_REQUEST["addedValue"])){
     ?>
     <div class="alert">
@@ -32,6 +31,3 @@ if (isset($_REQUEST["addedValue"])){
   // }
   ?>
 </body>
-<?php
-$yhendus->close();
-?>
