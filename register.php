@@ -1,6 +1,8 @@
 <?php
+require ($_SERVER["DOCUMENT_ROOT"]."/../seadistus.php");
+global $yhendus;
 if(isSet($_REQUEST["uusleht"])){
-  $kask=$yhendus->prepare("INSERT INTO Tantsuvoistlus (tantsija1, tantsija2) VALUES (?, ?)");
+  $kask=$yhendus->prepare("INSERT INTO tantsuvoistlus (tantsija1, tantsija2) VALUES (?, ?)");
   $kask->bind_param("ss", $_REQUEST["tantsija1"], $_REQUEST["tantsija2"]);
     if(strlen($_REQUEST["tantsija1"]) != 0 && strlen($_REQUEST["tantsija2"])){
         $kask->execute();
