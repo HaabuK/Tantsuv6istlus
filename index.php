@@ -2,6 +2,9 @@
 require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
 global $yhendus;
 
+if ($yhendus->connect_error) {
+    die("Database connection failed: " . $yhendus->connect_error);
+}
 ?>
 <style>
 <?php include 'style.css';

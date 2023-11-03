@@ -1,17 +1,23 @@
 <?php
+require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
+global $yhendus;
+
 if(isSet($_REQUEST["uusleht"])){
-  $kask=$yhendus->prepare("INSERT INTO tantsuvoistlus (tantsija1, tantsija2) VALUES (?, ?)");
+  $kask = $yhendus->prepare("INSERT INTO tantsuvoistlus (tantsija1, tantsija2, hinne1, hinne2, hinne3, punke) VALUES (?, ?, 0, 0, 0, 0)");
   $kask->bind_param("ss", $_REQUEST["tantsija1"], $_REQUEST["tantsija2"]);
-    if(strlen($_REQUEST["tantsija1"]) != 0 && strlen($_REQUEST["tantsija2"])){
-        $kask->execute();
-        header("Location: $_SERVER[PHP_SELF]");
-        $yhendus->close();
-        exit();
-    } else{
-        header("Location: $_SERVER[PHP_SELF]");
-        $yhendus->close();
-        exit();
-    }
+  $kask->execute();
+  if (!$kask) {
+    die("Error in prepared statement: " . $yhendus->error);
+  }
+  
+  if (!$kask->execute()) {
+    die("Error executing prepared statement: " . $kask->error);
+  }
+  // $paar = $_REQUEST["tantsija1"]." ja ".$_REQUEST["tantsija2"]
+  // header("Location: $_SERVER[PHP_SELF]?addedValue=$paar");
+  // header("Location: $_SERVER[PHP_SELF]");
+  $yhendus->close();
+  exit();
   }
 ?>
 <body>
@@ -22,32 +28,21 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2 FROM tantsuvoistlus");
 $kask->bind_result($id, $tantsija1, $tantsija2);
 $kask->execute();
   ?>
-  <form action='?'>
+  <form action=? method='POST'>
   <input type="hidden" name="uusleht" value="jah" />
-  <h1>Tantsupaari registreerimine</h1>
-            <div style="font-size: 35px">
-				Esimene tantsija:
-			</div>
+  <h1>Nimekirja lisamine</h1>
   <dl>
-  <dt style="font-size: 25px">Ees- ja perekonnanimi:</dt>
+  <dt style="font-size: 30px">Esimene osaleja:</dt>
   <dd>
-  <input style="margin-right: 40px; margin-bottom: 10px; font-size: 25px" type="name" name="tantsija1" label="tantsija1" /><br><br>
+  <input type="text" name="tantsija1" placeholder="Jüri Ratas"/>
   </dd>
-            <div style="font-size: 35px">
-				Teine tantsija:
-			</div>
-  <dl>
-  <dl>
-  <dt style="font-size: 25px">Ees- ja perekonnanimi:</dt>
+  <dt style="font-size: 30px">Teine osaleja:</dt>
   <dd>
-  <input style="margin-right: 40px; margin-bottom: 10px; font-size: 25px" type="name" name="tantsija2" label="tantsija2" />
+  <input type="text" name="tantsija2" placeholder="Evelin Ilves" />
   </dd>
   </dl>
   <br>
-  <button class="nupp" type="submit" value="sisesta">Saada</button>
+  <button class="nupp" type="submit" value="submit">Registreeru</button>
   </form>
-  <?php
-
-  ?>
   </div>
 </body>
