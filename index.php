@@ -20,4 +20,10 @@ if(isset($_REQUEST["page"])){
 }
 
 include("footer.php");
+
+$kask=$yhendus->prepare("SELECT id FROM tantsuvoistlus");
+  $kask->bind_result($id);
+  $kask->execute();
+
+
 ?>

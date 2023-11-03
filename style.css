@@ -154,8 +154,9 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: auto;
   text-align: center;
+  overflow-x: auto;
 }
 
 .alert {
@@ -184,11 +185,11 @@ table {
     width: 100%;
 }
 
-table tr:nth-child(odd) {
-  background-color:rgba(0, 0, 0, .5);
+table tr:nth-child(odd) { 
+  background-color:rgba(43, 14, 14, .5);
 }
 table tr:nth-child(even) {
-  background-color:rgba(43, 14, 14, .5);
+  background-color:rgba(0, 0, 0, .5);
 }
 
 th,
@@ -196,6 +197,7 @@ td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #DDD;
+    overflow-y: auto;
 }
 
 tr:hover {

@@ -1,9 +1,8 @@
 <?php
 if(isSet($_REQUEST["lisa_id"])){
   $hinne1 = isSet($_REQUEST["hinne1"])
-  $kask=$yhendus->prepare("UPDATE tantsuvoistlus SET hinne1=? WHERE id=?");
-  $kask=$yhendus->prepare("UPDATE tantsuvoistlus SET punkte=hinne1+hinn2+hinne3 WHERE id=?");
-  $kask->bind_param("i", $_REQUEST["lisa_id"]);
+  $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ?, punkte = hinne1 + hinne2 + hinne3 WHERE id = ?");
+  $kask->bind_param("ii", $_REQUEST["hinne1"], $_REQUEST["lisa_id"]);
   $kask->execute();
   header("Location: $_SERVER[PHP_SELF]");
 }
@@ -16,9 +15,22 @@ if(isSet($_REQUEST["lisa_id"])){
       $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $punkte);
       $kask->execute();
       while($kask->fetch()){
-        $paar = $tantsija1." ja ".$tantsija2
+        $paar = $tantsija1." ja ".$tantsija2;
+        if ($hinne1 == 0){
         echo "<li><h2><a style=\"color: black\"; href='?id=$id'>".
         htmlspecialchars($paar)."</a></h2></li>";
+        }
+        else {
+          for(1){
+            echo "<hr><li><h2><a style=\"color: black\"; href='?id=$id'>".
+            htmlspecialchars($paar)."</a></h2></li>";
+          }
+          else{
+            echo "<li><h2><a style=\"color: black\"; href='?id=$id'>".
+            htmlspecialchars($paar).": "
+            htmlspecialchars($hinne1)."</a></h2></li>";
+          }
+        }
     }
     ?>
   </div>
@@ -30,7 +42,7 @@ if(isSet($_REQUEST["lisa_id"])){
       $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $punkte);
       $kask->execute();
       if($kask->fetch()){
-        $paar = $tantsija1." ja ".$tantsija2
+        $paar = $tantsija1." ja ".$tantsija2;
         echo "<h2>".htmlspecialchars($paar)."</h2>";
         echo "punkte kokku:"htmlspecialchars($punkte)."<br><br>";
         ?>

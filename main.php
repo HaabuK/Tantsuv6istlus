@@ -13,10 +13,9 @@ if (isset($_REQUEST["addedValue"])){
 }
 ?>
 <body>
+  <h1 style="color: black; text-align: center; margin-bottom -20%">Top 5:</h1>
   <div>
-  <h1 style="color: black; text-align: center">Top 5:</h1>
-  <table style="border-collapse: collapse; width: 60%; margin: 0 auto;
-  ">
+  <table style="width: 70%;">
   
   <?php
   $koht = 1;

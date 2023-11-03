@@ -2,13 +2,14 @@
 $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY punkte DESC");
   $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
   $kask->execute();
+
+
 ?>
 
 <body>
-  <div>
-  <h1 style="color: #333; text-align: center;">Edetabel:</h1>
-  <table style="border-collapse: collapse; width: 60%; margin: 0 auto;
-  ">
+<h1 style="color: #333; text-align: center;">Edetabel:</h1>
+  <div style="height: 70%">
+  <table style="width: 70%;">
   
   <?php
   $koht = 1;
@@ -46,6 +47,8 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
       $koht += 1;
       }
     }
+    $koht = $koht - 1;
+    echo "<h2 style='position: fixed; color: black; text-align: left;'>Registreerunuid kokku: $koht</h2> "
   ?>
 </table>
   </div>
