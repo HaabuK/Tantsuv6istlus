@@ -21,8 +21,8 @@ if(isSet($_REQUEST["uusleht"])){
   }
 ?>
 <body>
-<div id="sisukiht">
-<ul>
+<div class="taust">
+<!-- <ul> -->
 <?php
 $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2 FROM tantsuvoistlus");
 $kask->bind_result($id, $tantsija1, $tantsija2);

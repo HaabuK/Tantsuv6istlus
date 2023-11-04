@@ -8,7 +8,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 
 <body>
 <h1 style="color: #333; text-align: center;">Edetabel:</h1>
-  <div style="height: 70%">
+  <div class="taust" style="height: 70%">
   <table style="width: 70%;">
   
   <?php

@@ -13,6 +13,12 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   }
+  #menyykiht{
+  float: left;
+  padding-top: 40px;
+  padding-right: 30px;
+  width:20%;
+  }
   #sisukiht{
   direction: flex;
   float:center;
@@ -22,13 +28,33 @@ body{
   align-items: center;
   justify-content: center;
   display: flex;
+  width:70%;
+  height:70%;
   }
-  #menyykiht{
-  float: left;
-  padding-top: 40px;
-  padding-right: 30px;
-  width:20%;
+
+  * {
+  box-sizing: border-box;
   }
+
+  .column {
+    float: left;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  .left {
+    float: left;
+  }
+  .right {
+    width: 70%;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
   textarea{
     margin-right: 40px;
     margin-bottom: 10px;
@@ -45,7 +71,8 @@ body{
     display: flex;
     height: 40px;
     width: 100%;
-    margin-left:-10px;
+    margin-left:-11px;
+    margin-right:-11px;
   }
   header {
     text-align: center;
@@ -59,7 +86,8 @@ body{
     display: flex;
     height: 40px;
     width: 100%;
-    margin-left:-10px;
+    margin-left:-11px;
+    margin-right:-11px;
   }
   .btn {
     background-color: rgb(54, 53, 53); 
@@ -146,7 +174,7 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div {
+.taust {
   border-radius: 30px;
   height: 50%;
   width: 50%; 

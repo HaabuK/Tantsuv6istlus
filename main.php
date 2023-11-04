@@ -14,7 +14,7 @@ if (isset($_REQUEST["addedValue"])){
 ?>
 <body>
   <h1 style="color: black; text-align: center; margin-bottom -20%">Top 5:</h1>
-  <div>
+  <div class="taust">
   <table style="width: 70%;">
   
   <?php
