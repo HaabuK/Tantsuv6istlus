@@ -107,13 +107,13 @@ body{
   }
   
   .nupp {
-    background-color: gray; 
+    background-color: rgb(54, 53, 53); 
     border: none; 
-    color: black; 
+    color: white; 
     padding: 11px 20px; 
     font-size: 16px; 
     cursor: pointer;
-    border-radius:20px
+    border-radius:10px
   }
   
   .nupp:hover {
@@ -127,7 +127,7 @@ body{
     padding: 11px 20px; 
     font-size: 16px; 
     cursor: pointer;
-    border-radius:20px
+    border-radius:10px
   }
   
   .del:hover {
@@ -140,8 +140,9 @@ body{
 
 input[type=text]{
   margin-bottom: 10px; 
-  font-size: 25px; 
-  text-align: center
+  margin-right: 35px; 
+  font-size: 30px;
+  text-align: center;
 }
 input[type=number],
 select {
@@ -149,7 +150,7 @@ select {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 4px;
     box-sizing: border-box;
 }

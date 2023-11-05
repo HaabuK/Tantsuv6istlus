@@ -7,7 +7,7 @@ if (isset($_REQUEST["addedValue"])){
     ?>
     <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        Lisati: <?=$_REQUEST["addedValue"]?>
+        Registreerus paar: <?=$_REQUEST["addedValue"]?>
     </div>
 <?php
 }

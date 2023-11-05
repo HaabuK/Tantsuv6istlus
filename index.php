@@ -2,15 +2,15 @@
 require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
 global $yhendus;
 
-if ($yhendus->connect_error) {
-    die("Database connection failed: " . $yhendus->connect_error);
-}
 ?>
 <style>
 <?php include 'style.css';
 ?>
 </style>
 <?php 
+
+require("functions.php");
+
 include("header.php");
 
 if(isset($_REQUEST["page"])){
@@ -21,9 +21,3 @@ if(isset($_REQUEST["page"])){
 
 include("footer.php");
 
-$kask=$yhendus->prepare("SELECT id FROM tantsuvoistlus");
-  $kask->bind_result($id);
-  $kask->execute();
-
-
-?>
