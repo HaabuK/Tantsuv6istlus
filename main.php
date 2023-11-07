@@ -5,7 +5,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 
 if (isset($_REQUEST["addedValue"])){
     ?>
-    <div class="alert">
+    <div class="alert" style="position:fixed; top:10%; left:10%;">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
         Registreerus paar: <?=$_REQUEST["addedValue"]?>
     </div>
@@ -29,7 +29,7 @@ if (isset($_REQUEST["addedValue"])){
   </div>
 
   <div class="vl" style="border-left: 40px solid rgba(197, 100, 100, .0)"></div>
-  
+
   <div class="taust" style="width:40%;">
     <div class="pais">
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Top 5 võistluspaari</h1>

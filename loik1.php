@@ -1,4 +1,17 @@
 <?php
+// if(isSet($_REQUEST["hinne1_id"])){
+//   $hinne1=$_REQUEST["hinne1_id"];
+//   $id=$_REQUEST["hinne1"];
+//   $kask=$yhendus->prepare("SELECT hinne1, punkte FROM tantsuvoistlus");
+//   $kask->bind_result($hinne, $punkte);
+//   $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ?, punkte = punkte - $hinne +$hinne1 WHERE id = ?");
+//   $kask->bind_param("ii", $id, $hinne1);
+//   $kask->execute();
+//   $yhendus->close();
+//   //header("Location: $_SERVER[PHP_SELF]");
+//   header("Location: index.php?page=loik1.php");
+//   exit();
+// }
 
 $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY hinne1 ASC");
   $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
@@ -11,7 +24,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Hindamine</h1>
     </div>
     <div class="sisu">
-      <table style="width: 80%; margin-top:-50px;">
+      <table style="width: 80%; margin-top:-30px;">
       <?php
       while($kask->fetch()){
         if ($hinne1 == 0){

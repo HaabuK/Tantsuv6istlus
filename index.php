@@ -2,14 +2,13 @@
 require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
 global $yhendus;
 
+require("functions.php");
 ?>
 <style>
 <?php include 'style.css';
 ?>
 </style>
 <?php 
-
-require("functions.php");
 
 include("header.php");
 
