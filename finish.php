@@ -5,7 +5,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 ?>
 
 <body style=" background-image: url('poodium.jpg');">
-  <h1 class="pealkiri" style="color:green; position:fixed; top:5%;">Auhinnatud paarid</h1>
+  <h1 class="pealkiri" style="background-color: rgba(179, 160, 33, .5); color:navy; position:fixed; top:5%;">Auhinnalistel kohtadel olevad paarid</h1>
   <?php
   $koht = 1;
   while($kask->fetch()){

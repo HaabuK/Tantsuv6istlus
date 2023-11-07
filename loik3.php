@@ -4,7 +4,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
   $kask->execute();
 ?>
-<h1 class="pealkiri" style="position:fixed; top:10%;">Esimene lõik:</h1>
+<h1 class="pealkiri" style="position:fixed; top:10%;">Kolmas lõik:</h1>
 <body style="flex-direction: row;">
   <div class="taust" style="width:40%;">
     <div class="pais">
