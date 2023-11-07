@@ -19,7 +19,7 @@ if (isset($_REQUEST["addedValue"])){
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Üritusest</h1>
     </div>
     <div class="sisu">
-      <table style="width: 80%;">
+      <table class="tabel">
       
       <?php
       
@@ -35,7 +35,7 @@ if (isset($_REQUEST["addedValue"])){
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Top 5 võistluspaari</h1>
     </div>
     <div class="sisu">
-      <table style="width: 80%; margin-top:-50px;">
+      <table class="tabel">
       <?php
     $koht = 1;
     while($kask->fetch()){
@@ -57,9 +57,9 @@ if (isset($_REQUEST["addedValue"])){
       }
       else if ($koht == 3){
         echo "<tr>
-        <th style='background-color:rgba(90, 52, 18, .5); color: #fff; font-weight: bold;'>Paar: $tantsija1 ja $tantsija2 </th> 
-        <th style='background-color:rgba(90, 52, 18, .5); color: #fff; font-weight: bold;'>Kokku punkte: $punkte</th>
-        <th style='background-color:rgba(90, 52, 18, .5); color: #fff; font-weight: bold;'>Positsioon: $koht</th>
+        <th style='background-color:rgba(125, 67, 16, 0.5); color: #fff; font-weight: bold;'>Paar: $tantsija1 ja $tantsija2 </th> 
+        <th style='background-color:rgba(125, 67, 16, 0.5); color: #fff; font-weight: bold;'>Kokku punkte: $punkte</th>
+        <th style='background-color:rgba(125, 67, 16, 0.5); color: #fff; font-weight: bold;'>Positsioon: $koht</th>
         </tr><br>";
         $koht += 1;
       }
@@ -72,8 +72,19 @@ if (isset($_REQUEST["addedValue"])){
         $koht += 1;
       }
     }
+    while ($koht < 6){
+      echo "<tr>
+      <th style='color: #fff; font-weight: bold;'></th> 
+      <th style='color: #fff; font-weight: bold;'></th>
+      <th style='color: #fff; font-weight: bold;'></th>
+      </tr><br>";
+      $koht += 1;
+    }
     ?>
     </table>
     </div>
   </div>
 </body>
+<?php
+$yhendus->close();
+?>

@@ -1,41 +1,39 @@
 <?php
-$kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte FROM tantsuvoistlus ORDER BY punkte DESC LIMIT 3");
-  $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte);
+$kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte, finishis FROM tantsuvoistlus ORDER BY punkte DESC LIMIT 3");
+  $kask->bind_result($id, $tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte, $finishis);
   $kask->execute();
 ?>
-<?php 
-if (isset($_REQUEST["addedValue"])){
-    ?>
-    <div class="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        Lisati: <?=$_REQUEST["addedValue"]?>
-    </div>
-<?php
-}
-?>
 
-<body>
-  <h1 style="color: #333; text-align: center;">Top 3</h1>
-  <table style="border-collapse: collapse; width: 60%; margin: 0 auto; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-  
+<body style=" background-image: url('poodium.jpg');">
+  <h1 class="pealkiri" style="color:green; position:fixed; top:5%;">Auhinnatud paarid</h1>
   <?php
   $koht = 1;
   while($kask->fetch()){
-    // if ($koht > 5){
-    //   break
-    // }
-    // else {
-      echo "<tr>
-      <th style='background-color: #333; color: #fff; font-weight: bold;'>Paar: $tantsija1 ja $tantsija2 </th> 
-      <th style='background-color: #333; color: #fff; font-weight: bold;'>Kokku punkte: $punkte</th>
-      <th style='background-color: #333; color: #fff; font-weight: bold;'>Positsioon: $koht</th>
-      </tr><br>";
-      $koht += 1;
+    if ($finishis == 1){
+      if ($koht == 1){
+        echo "<div style='position:fixed; top:25%; width:350px;'>
+        <a style='color:rgba(179, 160, 33); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
+        <a style='color:rgba(179, 160, 33); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
+        <a style='color:rgba(179, 160, 33); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
+        $koht += 1;
+      }
+      else if ($koht == 2){
+        echo "<div style='position:fixed; top:40%; left:15%; width:350px;'>
+        <a style='color:rgba(124, 124, 124); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
+        <a style='color:rgba(124, 124, 124); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
+        <a style='color:rgba(124, 124, 124); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
+        $koht += 1;
+      }
+      else if ($koht == 3){
+        echo "<div style='position:fixed; top:48%; right:15%; width:350px;'>
+        <a style='color:rgba(125, 67, 16); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
+        <a style='color:rgba(125, 67, 16); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
+        <a style='color:rgba(125, 67, 16); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
+        $koht += 1;
+      }
     }
-   
-  // }
+  }
   ?>
-</table>
 </body>
 <?php
 $yhendus->close();

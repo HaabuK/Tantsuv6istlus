@@ -7,6 +7,8 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2 FROM tantsuvoistlus");
 $kask->bind_result($id, $tantsija1, $tantsija2);
 $kask->execute();
   ?>
+  <br>
+  <br>
   <form action=? method='POST'>
   <input type="hidden" name="register" value="jah" />
   <br>
