@@ -1,4 +1,6 @@
 <body>
+<h1 class="pealkiri">Võistluspaari registreerimine</h1>
+<hr>
 <div class="taust">
 <?php
 $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2 FROM tantsuvoistlus");
@@ -7,8 +9,6 @@ $kask->execute();
   ?>
   <form action=? method='POST'>
   <input type="hidden" name="register" value="jah" />
-  <h1>Võistluspaariks registreerimine</h1>
-  <hr>
   <br>
   <dl>
   <dt style="font-size: 35px; margin-bottom: 10px;">Esimene paariline</dt>
