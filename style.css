@@ -280,7 +280,7 @@ input[type=submit]:hover {
 .alert {
     padding: 20px;
     background-color: rgba(79, 252, 119, .7);
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .danger {

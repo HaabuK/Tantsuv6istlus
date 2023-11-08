@@ -18,15 +18,16 @@ if (isset($_REQUEST["addedValue"])){
     <div class="pais">
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Üritusest</h1>
     </div>
-    <div class="sisu">
-      <table class="tabel">
-      
-      <?php
-      
-      ?>
-      </table>
+    <div class="sisu" style="justify-content:center; align-items: center;">
+      <h2 style="width: 80%; height: 80%;">Meie iga-aastane Hambo Maraton toimub see aasta Tartumaa käänuliste maastike vahel.
+      Võta kaasa pere, sõbrad ja hea tuju ning veeda üks päikseline päev koos särtsakate
+      tantsuliigutuste, hea muusika ning maitsva kohaliku toiduga.</h2>
     </div>
   </div>
+
+  <div class="taust" style="overflow: hidden; padding: 20px; height:8%; width: auto; position:fixed; bottom:10%; align-items: center; justify-content:center;">
+      <h2>Osalustasu:  Täiskasvanud: 30€,  Lapsed ja Eakad: 15€,  Õpilased: 20€ (Hind sisaldab toitlustust)</h2>
+    </div>
 
   <div class="vl" style="border-left: 40px solid rgba(197, 100, 100, .0)"></div>
 

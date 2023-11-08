@@ -15,7 +15,9 @@
 
     header("Location: $_SERVER[PHP_SELF]?addedValue=$paar");
   }
-  header("Location: index.php?page=register");
+  else {
+    header("Location: index.php?page=register");
+  }
   exit();
   }
 

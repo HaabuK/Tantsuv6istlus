@@ -11,21 +11,21 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   while($kask->fetch()){
     if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0 && $finishis == 1){
       if ($koht == 1){
-        echo "<div style='position:fixed; top:25%; width:350px;'>
+        echo "<div class='taust' style='justify-content: center; background-color: rgba(207, 205, 201,.9); position:fixed; top:25%; width:350px; height:40%;'>
         <a style='color:rgba(179, 160, 33); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
         <a style='color:rgba(179, 160, 33); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
         <a style='color:rgba(179, 160, 33); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
         $koht += 1;
       }
       else if ($koht == 2){
-        echo "<div style='position:fixed; top:40%; left:15%; width:350px;'>
+        echo "<div class='taust' style='justify-content: center; background-color: rgba(207, 205, 201,.9); position:fixed; top:40%; left:15%; width:350px; height:40%;'>
         <a style='color:rgba(124, 124, 124); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
         <a style='color:rgba(124, 124, 124); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
         <a style='color:rgba(124, 124, 124); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
         $koht += 1;
       }
       else if ($koht == 3){
-        echo "<div style='position:fixed; top:48%; right:15%; width:350px;'>
+        echo "<div class='taust' style='justify-content: center; background-color: rgba(207, 205, 201,.9); position:fixed; top:48%; right:15%; width:350px; height:40%;'>
         <a style='color:rgba(125, 67, 16); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>
         <a style='color:rgba(125, 67, 16); font-size:40px; font-weight: bold;'>Punkte: $punkte</a> <br>
         <a style='color:rgba(125, 67, 16); font-size:25px; font-weight: bold;'> $hinne1 | $hinne2 | $hinne3</a></div>";
