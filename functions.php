@@ -120,28 +120,28 @@
       }
 
       if ($hinne1 != $loik1 && $loik1 != NULL) {
-        $punktid = $punkte - $vana1 + $loik1;
         $hinne1 = $loik1;
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ?, punkte = ? WHERE id = $id");
-        $kask->bind_param("ii", $loik1, $punktid);
+        $kask->close();
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik1);
         $kask->execute();
         
       }
 
       if ($hinne2 != $loik2 && $loik2 != NULL) {
-        $punktid = $punkte - $vana2 + $loik2;
         $hinne2 = $loik2;
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ?, punkte = ? WHERE id = $id");
-        $kask->bind_param("ii", $loik2, $punktid);
+        $kask->close();
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik2);
         $kask->execute();
         
       }
 
       if ($hinne3 != $loik3 && $loik3 != NULL) {
-        $punktid = $punkte - $vana1 + $loik1 - $vana2 + $loik2 - $vana3 + $loik3;
         $hinne3 = $loik3;
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ?, punkte = ? WHERE id = $id");
-        $kask->bind_param("ii", $loik3, $punktid);
+        $kask->close();
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik3);
         $kask->execute();
         
       }
@@ -152,6 +152,17 @@
         $kask->bind_param("i", $id);
         $kask->execute();
       }
+
+      $punktid = $punkte - $vana1 - $vana2 - $vana3 + $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
+      $vana1 = $hinne1;
+      $vana2 = $hinne2;
+      $vana3 = $hinne3;
+
+      $kask->close();
+
+      $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET punkte = ?, vana1 = ?, vana2 = ?, vana3 = ? WHERE id = $id");
+       $kask->bind_param("iiii", $punktid, $vana1, $vana2, $vana3);
+      $kask->execute();
   
     }
 
