@@ -9,10 +9,16 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 <div class="dropdown" style="position:fixed; top:7%; left:3%">
   <button class="dropbtn">Menüü</button>
   <div class="dropdown-content">
-    <a href="#">ALustavad paarid</a>
-    <a href="#">Võistlevad paarid</a>
-    <a href="#">Lõpetanud paarid</a>
-    <a href="#">DNF paarid</a>
+    <?php
+    $id = 1;
+    $tantsija1 = "Tantsija A";
+    $tantsija2 = "Tantsija B";
+    echo "<a href='link.php?id=$id&tantsija1=$tantsija1&tantsija2=$tantsija2'>Registreeritud paarid</a>";
+    // echo "<a href='#'>Alustavad paarid</a>";
+    echo "<a href='#'>Võistlevad paarid</a>";
+    echo "<a href='#'>Lõpetanud paarid</a>";
+    echo "<a href='#'>DNF paarid</a>";
+    ?>
   </div>
 </div>
 
