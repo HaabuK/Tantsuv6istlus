@@ -6,12 +6,13 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 
   $tabel=0;
 ?>
-<div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
+<div class="dropdown" style="position:fixed; top:7%; left:3%">
+  <button class="dropbtn">Menüü</button>
   <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="#">ALustavad paarid</a>
+    <a href="#">Võistlevad paarid</a>
+    <a href="#">Lõpetanud paarid</a>
+    <a href="#">DNF paarid</a>
   </div>
 </div>
 
