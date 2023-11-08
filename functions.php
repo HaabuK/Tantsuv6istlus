@@ -7,11 +7,15 @@
   $tantsija1=$_REQUEST["tantsija1"];
   $tantsija2=$_REQUEST["tantsija2"];
   $paar=$tantsija1." ja ".$tantsija2;
-  $kask = $yhendus->prepare("INSERT INTO tantsuvoistlus (tantsija1, tantsija2) VALUES (?, ?)");
-  $kask->bind_param("ss", $tantsija1, $tantsija2);
-  $kask->execute();
-  $yhendus->close();
-  header("Location: $_SERVER[PHP_SELF]?addedValue=$paar");
+  if ($tantsija1 != NULL && $tantsija2 != NULL){
+    $kask = $yhendus->prepare("INSERT INTO tantsuvoistlus (tantsija1, tantsija2) VALUES (?, ?)");
+    $kask->bind_param("ss", $tantsija1, $tantsija2);
+    $kask->execute();
+    $yhendus->close();
+
+    header("Location: $_SERVER[PHP_SELF]?addedValue=$paar");
+  }
+  header("Location: index.php?page=register");
   exit();
   }
 
@@ -59,30 +63,6 @@
     exit();
   }
 
-
-
-
-
-  //admin
-
-  if(isSet($_REQUEST["lopetanud_id"])){
-    $id = $_REQUEST["lopetanud_id"];
-    $tabel = $_REQUEST["tabel"];
-    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = ? WHERE id = $id");
-    $kask->bind_param("ii", $_REQUEST["lopus"], $id);
-    $kask->execute();
-
-    $yhendus->close();
-
-    if ($tabel == 0){
-      header("Location: index.php?page=admin");
-    }
-    if ($tabel != 0){
-      header("Location: index.php?page=admin$tabel");
-    }
-    exit();
-  }
-
   function punkte($yhendus, $id) {
     $kask=$yhendus->prepare("SELECT hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
     $kask->bind_result($hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
@@ -107,6 +87,28 @@
       }
 
   }
+
+
+  //admin
+
+  if(isSet($_REQUEST["eemalda_id"])){
+    $id = $_REQUEST["eemalda_id"];
+    $tabel = $_REQUEST["tabel"];
+    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = ? WHERE id = $id");
+    $kask->bind_param("ii", 1, $id);
+    $kask->execute();
+
+    $yhendus->close();
+
+    if ($tabel == 0){
+      header("Location: index.php?page=admin");
+    }
+    if ($tabel != 0){
+      header("Location: index.php?page=admin$tabel");
+    }
+    exit();
+  }
+
 
   if(isSet($_REQUEST["admin_id"])){
     $id = $_REQUEST["admin_id"];
@@ -183,6 +185,13 @@
         $kask->bind_param("i", $id);
         $kask->execute();
       }
+      else if ($hinne1 == 0 || $hinne2 == 0 || $hinne3 == 0){
+        $kask->close();
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 0 WHERE id = ?");
+        $kask->bind_param("i", $id);
+        $kask->execute();
+      }
+    
 
       $punktid = $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
       $vana1 = $hinne1;

@@ -279,8 +279,14 @@ input[type=submit]:hover {
 
 .alert {
     padding: 20px;
-    background-color: #04AA6D;
+    background-color: rgba(79, 252, 119, .7);
     color: white;
+}
+
+.danger {
+  padding: 20px;
+  background-color: rgba(254, 0, 0, 0.7);
+  color: white;
 }
 
 .closebtn {
