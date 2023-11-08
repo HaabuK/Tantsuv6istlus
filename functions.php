@@ -1,9 +1,7 @@
 <?php
-require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
-global $yhendus;
 
 //registreerimine
-if(isSet($_REQUEST["register"])){
+  if(isSet($_REQUEST["register"])){
   $tantsija1=$_REQUEST["tantsija1"];
   $tantsija2=$_REQUEST["tantsija2"];
   $paar=$tantsija1." ja ".$tantsija2;
@@ -81,5 +79,46 @@ if(isSet($_REQUEST["register"])){
       }
 
   }
+
+  if(isSet($_REQUEST["admin_id"])){
+    $id = $_REQUEST["admin_id"];
+    $nimi1 = $_REQUEST["nimi1"];
+    $nimi2 = $_REQUEST["nimi2"];
+    $loik1 = $_REQUEST["loik1"];
+    $loik2 = $_REQUEST["loik2"];
+    $loik3 = $_REQUEST["loik3"];
+    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = ?");
+    $kask->bind_param("ii", $_REQUEST["hinne3"], $id);
+    $kask->execute();
+
+    muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
+
+    exit();
+    }
+
+    function muuda($yhendus, $id) {
+      $kask=$yhendus->prepare("SELECT hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
+      $kask->bind_result($hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
+      $kask->execute();
+      $kask->fetch();
+  
+        $punktid = $punkte - $vana1 - $vana2 - $vana3 + $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
+        $vana1 = $hinne1;
+        $vana2 = $hinne2;
+        $vana3 = $hinne3;
+  
+        $kask->close();
+  
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET punkte = ?, vana1 = ?, vana2 = ?, vana3 = ? WHERE id = $id");
+         $kask->bind_param("iiii", $punktid, $vana1, $vana2, $vana3);
+        $kask->execute();
+  
+        if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0){
+          $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
+          $kask->bind_param("i", $id);
+          $kask->execute();
+        }
+  
+    }
 
 ?>
