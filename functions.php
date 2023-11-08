@@ -1,6 +1,4 @@
 <?php
-require ($_SERVER["DOCUMENT_ROOT"]."/../config.php");
-global $yhendus;
 
 //registreerimine
 if(isSet($_REQUEST["register"])){
