@@ -122,7 +122,6 @@
       if ($hinne1 != $loik1 && $loik1 != NULL) {
         $punktid = $punkte - $vana1 + $loik1;
         $hinne1 = $loik1;
-        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ?, punkte = ? WHERE id = $id");
         $kask->bind_param("ii", $loik1, $punktid);
         $kask->execute();
@@ -132,7 +131,6 @@
       if ($hinne2 != $loik2 && $loik2 != NULL) {
         $punktid = $punkte - $vana2 + $loik2;
         $hinne2 = $loik2;
-        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ?, punkte = ? WHERE id = $id");
         $kask->bind_param("ii", $loik2, $punktid);
         $kask->execute();
@@ -142,7 +140,6 @@
       if ($hinne3 != $loik3 && $loik3 != NULL) {
         $punktid = $punkte - $vana3 + $loik3;
         $hinne3 = $loik3;
-        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ?, punkte = ? WHERE id = $id");
         $kask->bind_param("ii", $loik3, $punktid);
         $kask->execute();
