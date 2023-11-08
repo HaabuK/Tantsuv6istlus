@@ -46,8 +46,10 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
         <th class='esimene' style='color: #fff; font-weight: bold; text-align: center;'> Salvesta:</th>
         </tr><br>";
       $read = 0;
+      $koht = 0;
       while($kask->fetch()){
-        if ($hinne1 == 1 && $finishis == 0){
+        $koht += 1;
+        if ($hinne1 > 0 && $finishis == 0){
           echo "<tr>
           <form action=? method='POST'>
         <input type='hidden' name='admin_id' value='$id' />
@@ -57,7 +59,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
           <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='5' name='loik2' placeholder='$hinne2' /></th>
           <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='5' name='loik3' placeholder='$hinne3' /></th>
           <th class='vasak'> $punkte </th>
-          <th class='vasak'>". ($read+1)."</th>
+          <th class='vasak'>". ($koht)."</th>
           <th class='vasak'><a href='?lopetanud_id=$id'><button class='finish0'><i class='fa fa-home'></i> võistlemas</button></a></th>
           <th class='vasak'><button class='nupp' type='submit' value='submit'>salvesta</button></th>
           </form>
