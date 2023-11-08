@@ -87,18 +87,15 @@
     $loik1 = $_REQUEST["loik1"];
     $loik2 = $_REQUEST["loik2"];
     $loik3 = $_REQUEST["loik3"];
-    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = ?");
-    $kask->bind_param("ii", $_REQUEST["hinne3"], $id);
-    $kask->execute();
 
-    muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
+    muuda($id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
 
     exit();
     }
 
-    function muuda($yhendus, $id) {
-      $kask=$yhendus->prepare("SELECT hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
-      $kask->bind_result($hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
+    function muuda($id, $nimi1, $nimi2, $loik1, $loik2, $loik3) {
+      $kask=$yhendus->prepare("SELECT tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
+      $kask->bind_result($tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
       $kask->execute();
       $kask->fetch();
   
@@ -108,16 +105,47 @@
         $vana3 = $hinne3;
   
         $kask->close();
-  
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET punkte = ?, vana1 = ?, vana2 = ?, vana3 = ? WHERE id = $id");
-         $kask->bind_param("iiii", $punktid, $vana1, $vana2, $vana3);
+
+      if ($tantsija1 != $nimi1 && $nimi1 != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija1 = ? WHERE id = $id");
+        $kask->bind_param("s", $nimi1);
         $kask->execute();
-  
-        if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0){
-          $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
-          $kask->bind_param("i", $id);
-          $kask->execute();
-        }
+        $kask->close();
+      }
+
+      if ($tantsija2 != $nimi2 && $nimi2 != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija2 = ? WHERE id = $id");
+        $kask->bind_param("s", $nimi2);
+        $kask->execute();
+        $kask->close();
+      }
+
+      if ($hinne1 != $loik1 && $loik1 != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik1);
+        $kask->execute();
+        $kask->close();
+      }
+
+      if ($hinne2 != $loik2 && $loik2 != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik2);
+        $kask->execute();
+        $kask->close();
+      }
+
+      if ($hinne3 != $loik3 && $loik3 != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik3);
+        $kask->execute();
+        $kask->close();
+      }
+
+      if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0){
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
+        $kask->bind_param("i", $id);
+        $kask->execute();
+      }
   
     }
 
