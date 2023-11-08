@@ -9,7 +9,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   <?php
   $koht = 1;
   while($kask->fetch()){
-    if ($finishis == 1){
+    if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0 && $finishis == 1){
       if ($koht == 1){
         echo "<div style='position:fixed; top:25%; width:350px;'>
         <a style='color:rgba(179, 160, 33); font-size:50px; font-weight: bold;'>$tantsija1 ja $tantsija2 </a> <br>

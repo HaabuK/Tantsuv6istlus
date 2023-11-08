@@ -1,5 +1,7 @@
 <?php
 
+
+
 //registreerimine
   if(isSet($_REQUEST["register"])){
   $tantsija1=$_REQUEST["tantsija1"];
@@ -12,6 +14,8 @@
   header("Location: $_SERVER[PHP_SELF]?addedValue=$paar");
   exit();
   }
+
+
 
 
   //hindamine
@@ -55,13 +59,37 @@
     exit();
   }
 
+
+
+
+
+  //admin
+
+  if(isSet($_REQUEST["lopetanud_id"])){
+    $id = $_REQUEST["lopetanud_id"];
+    $tabel = $_REQUEST["tabel"];
+    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = ? WHERE id = $id");
+    $kask->bind_param("ii", $_REQUEST["lopus"], $id);
+    $kask->execute();
+
+    $yhendus->close();
+
+    if ($tabel == 0){
+      header("Location: index.php?page=admin");
+    }
+    if ($tabel != 0){
+      header("Location: index.php?page=admin$tabel");
+    }
+    exit();
+  }
+
   function punkte($yhendus, $id) {
     $kask=$yhendus->prepare("SELECT hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
     $kask->bind_result($hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
     $kask->execute();
     $kask->fetch();
 
-      $punktid = $punkte - $vana1 - $vana2 - $vana3 + $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
+      $punktid = $hinne1 + $hinne2 + $hinne3;
       $vana1 = $hinne1;
       $vana2 = $hinne2;
       $vana3 = $hinne3;
@@ -87,11 +115,18 @@
     $loik1 = $_REQUEST["loik1"];
     $loik2 = $_REQUEST["loik2"];
     $loik3 = $_REQUEST["loik3"];
+    $tabel = $_REQUEST["tabel"];
 
     muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
     $yhendus->close();
 
-    header("Location: index.php?page=admin");
+    if ($tabel == 0){
+      header("Location: index.php?page=admin");
+    }
+    if ($tabel != 0){
+      header("Location: index.php?page=admin$tabel");
+    }
+    
     exit();
     }
 
@@ -108,11 +143,9 @@
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija1 = ? WHERE id = $id");
         $kask->bind_param("s", $nimi1);
         $kask->execute();
-        $kask->close();
       }
 
       if ($tantsija2 != $nimi2 && $nimi2 != NULL) {
-        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija2 = ? WHERE id = $id");
         $kask->bind_param("s", $nimi2);
         $kask->execute();
@@ -122,24 +155,22 @@
       if ($hinne1 != $loik1 && $loik1 != NULL) {
         $hinne1 = $loik1;
         $kask->close();
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ?, punkte = ? WHERE id = $id");
-        $kask->bind_param("ii", $loik1, $punktid);
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik1);
         $kask->execute();
         
       }
 
       if ($hinne2 != $loik2 && $loik2 != NULL) {
         $hinne2 = $loik2;
-        $kask->close();
-        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ?, punkte = ? WHERE id = $id");
-        $kask->bind_param("ii", $loik2, $punktid);
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ? WHERE id = $id");
+        $kask->bind_param("i", $loik2);
         $kask->execute();
         
       }
 
       if ($hinne3 != $loik3 && $loik3 != NULL) {
         $hinne3 = $loik3;
-        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = $id");
         $kask->bind_param("i", $loik3);
         $kask->execute();
@@ -158,7 +189,7 @@
       $vana2 = $hinne2;
       $vana3 = $hinne3;
       $kask->close();
-      
+
       $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET punkte = ?, vana1 = ?, vana2 = ?, vana3 = ? WHERE id = $id");
        $kask->bind_param("iiii", $punktid, $vana1, $vana2, $vana3);
       $kask->execute();

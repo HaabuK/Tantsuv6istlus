@@ -5,7 +5,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   $kask->execute();
 
   if ($tabel == NULL){
-    $tabel=0;
+    $tabel=1;
   }
 
 
@@ -25,12 +25,12 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 
 <h1 class="pealkiri" style="position:fixed; top:5%;">Administraator</h1>
 <body style="flex-direction: column; background-color: rgba(43, 14, 14, .9); background-image: none">
-<?php if($tabel==0) {
+<?php if($tabel==1) {
     ?>
 
   <div class="taust" style="width:95%;height:70%">
     <div class="pais">
-    <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Alustamiseks valmistuvad paarid:</h1>
+    <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Tantsimas olevad paarid:</h1>
     </div>
     <div class="sisu" style="width:95%;height: 60%;">
       <table class="tabel" style="width:90%;">
@@ -50,7 +50,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
       $koht = 0;
       while($kask->fetch()){
         $koht += 1;
-        if ($hinne1 == 0 && $hinne2 == 0 && $hinne3 == 0 && $finishis == 0){
+        if (($hinne1 > 0 || $hinne2 > 0 || $hinne3 > 0) && $finishis == 0){
           echo "<tr>
           <form action=? method='POST'>
           <input type='hidden' name='admin_id' value='$id' />
@@ -89,8 +89,6 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   </div>
   <?php }
     ?>
-
-
 </body>
 <?php
 $yhendus->close();

@@ -5,7 +5,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   $kask->execute();
 
   if ($tabel == NULL){
-    $tabel=0;
+    $tabel=2;
   }
 
 
@@ -25,12 +25,12 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 
 <h1 class="pealkiri" style="position:fixed; top:5%;">Administraator</h1>
 <body style="flex-direction: column; background-color: rgba(43, 14, 14, .9); background-image: none">
-<?php if($tabel==0) {
+<?php if($tabel==2) {
     ?>
 
   <div class="taust" style="width:95%;height:70%">
     <div class="pais">
-    <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Alustamiseks valmistuvad paarid:</h1>
+    <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Lõpetanud paarid:</h1>
     </div>
     <div class="sisu" style="width:95%;height: 60%;">
       <table class="tabel" style="width:90%;">
@@ -50,7 +50,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
       $koht = 0;
       while($kask->fetch()){
         $koht += 1;
-        if ($hinne1 == 0 && $hinne2 == 0 && $hinne3 == 0 && $finishis == 0){
+        if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0 && $finishis == 1){
           echo "<tr>
           <form action=? method='POST'>
           <input type='hidden' name='admin_id' value='$id' />
@@ -62,7 +62,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
           <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='5' name='loik3' placeholder='$hinne3' /></th>
           <th class='vasak'> $punkte </th>
           <th class='vasak'>". ($koht)."</th>
-          <th class='vasak'><a href='?lopetanud_id=$id&&lopus=1&&tabel=$tabel'><button class='nupp'><i class='fa fa-home'></i>DNF</button></a></th>
+          <th class='vasak'><a href='?lopetanud_id=$id&&lopus=0&&tabel=$tabel'><button class='nupp'><i class='fa fa-home'></i>Rajale<br>tagasi</button></a></th>
           <th class='vasak'><button class='nupp' type='submit' value='submit'>Salvesta</button></th>
           </form>
           </tr><br>";
@@ -89,8 +89,6 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
   </div>
   <?php }
     ?>
-
-
 </body>
 <?php
 $yhendus->close();
