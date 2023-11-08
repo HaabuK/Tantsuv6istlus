@@ -21,11 +21,11 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
 <?php if($tabel==0) {
     ?>
 
-  <div class="taust" style="width:80%;height:70%">
+  <div class="taust" style="width:95%;height:70%">
     <div class="pais">
     <h1 style="position: absolute; color: black; text-align: center; margin-bottom -20%">Tantsimas olevad paarid:</h1>
     </div>
-    <div class="sisu" style="width:80%;height: 60%;">
+    <div class="sisu" style="width:95%;height: 60%;">
       <table class="tabel" style="width:90%;">
       <?php
         echo "<tr>
@@ -37,11 +37,14 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
         <th class='esimene' style='color: #fff; font-weight: bold; text-align: center;'> Hinne:</th>
         <th class='esimene' style='color: #fff; font-weight: bold; text-align: center;'> Positsioon:</th> 
         <th class='esimene' style='color: #fff; font-weight: bold; text-align: center;'> Lõpetanud:</th>
+        <th class='esimene' style='color: #fff; font-weight: bold; text-align: center;'> Salvesta:</th>
         </tr><br>";
       $read = 0;
       while($kask->fetch()){
         if ($hinne1 == 1 && $finishis == 0){
           echo "<tr>
+          <form action=? method='POST'>
+        <input type='hidden' name='admin_id' value='$id' />
           <th class='vasak'> $id </th> 
           <th class='vasak'><input type='text' name='nimi1' placeholder='$tantsija1' /><input type='text' name='nimi2' placeholder='$tantsija2' /></th> 
           <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='5' name='loik1' placeholder='$hinne1' /></th>
@@ -50,6 +53,8 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
           <th class='vasak'> $punkte </th>
           <th class='vasak'>". ($read+1)."</th>
           <th class='vasak'><a href='?lopetanud_id=$id'><button class='finish0'><i class='fa fa-home'></i> võistlemas</button></a></th>
+          <th class='vasak'><button class='nupp' type='submit' value='submit'>salvesta</button></th>
+          </form>
           </tr><br>";
           $read += 1;
         }
@@ -61,6 +66,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
           <th class='vasak' ></th>
           <th class='vasak' ></th>
           <th class='vasak' ></th>
+          <th class='vasak'></th>
           <th class='vasak'></th>
           <th class='vasak'></th>
           <th class='vasak'></th>

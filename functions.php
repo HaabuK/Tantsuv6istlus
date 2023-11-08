@@ -89,7 +89,9 @@
     $loik3 = $_REQUEST["loik3"];
 
     muuda($id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
+    $yhendus->close();
 
+    header("Location: index.php?page=admin");
     exit();
     }
 
@@ -98,15 +100,17 @@
       $kask->bind_result($tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
       $kask->execute();
       $kask->fetch();
+      
   
         $punktid = $punkte - $vana1 - $vana2 - $vana3 + $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
         $vana1 = $hinne1;
         $vana2 = $hinne2;
         $vana3 = $hinne3;
   
-        $kask->close();
+        
 
       if ($tantsija1 != $nimi1 && $nimi1 != NULL) {
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija1 = ? WHERE id = $id");
         $kask->bind_param("s", $nimi1);
         $kask->execute();
@@ -114,34 +118,39 @@
       }
 
       if ($tantsija2 != $nimi2 && $nimi2 != NULL) {
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET tantsija2 = ? WHERE id = $id");
         $kask->bind_param("s", $nimi2);
         $kask->execute();
-        $kask->close();
+        
       }
 
       if ($hinne1 != $loik1 && $loik1 != NULL) {
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne1 = ? WHERE id = $id");
         $kask->bind_param("i", $loik1);
         $kask->execute();
-        $kask->close();
+        
       }
 
       if ($hinne2 != $loik2 && $loik2 != NULL) {
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne2 = ? WHERE id = $id");
         $kask->bind_param("i", $loik2);
         $kask->execute();
-        $kask->close();
+        
       }
 
       if ($hinne3 != $loik3 && $loik3 != NULL) {
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET hinne3 = ? WHERE id = $id");
         $kask->bind_param("i", $loik3);
         $kask->execute();
-        $kask->close();
+        
       }
 
       if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0){
+        $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
         $kask->bind_param("i", $id);
         $kask->execute();
