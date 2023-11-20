@@ -94,10 +94,10 @@
   //admin
 
   if(isSet($_REQUEST["eemalda_id"])){
-    $id = $_REQUEST["eemalda_id"];
+    // $id = $_REQUEST["eemalda_id"];
     $tabel = $_REQUEST["tabel"];
-    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = ? WHERE id = $id");
-    $kask->bind_param("ii", 1, $id);
+    $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
+    $kask->bind_param("i", $_REQUEST["eemalda_id"]);
     $kask->execute();
 
     $yhendus->close();
@@ -119,9 +119,10 @@
     $loik1 = $_REQUEST["loik1"];
     $loik2 = $_REQUEST["loik2"];
     $loik3 = $_REQUEST["loik3"];
+    $lopeta = $_REQUEST["lopeta"];
     $tabel = $_REQUEST["tabel"];
 
-    muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3);
+    muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3, $lopeta);
     $yhendus->close();
 
     if ($tabel == 0){
@@ -134,9 +135,9 @@
     exit();
     }
 
-    function muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3) {
-      $kask=$yhendus->prepare("SELECT tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3 FROM tantsuvoistlus WHERE id = $id");
-      $kask->bind_result($tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3);
+    function muuda($yhendus, $id, $nimi1, $nimi2, $loik1, $loik2, $loik3, $lopeta) {
+      $kask=$yhendus->prepare("SELECT tantsija1, tantsija2, hinne1, hinne2, hinne3, punkte, vana1, vana2, vana3, finishis FROM tantsuvoistlus WHERE id = $id");
+      $kask->bind_result($tantsija1, $tantsija2, $hinne1, $hinne2, $hinne3, $punkte, $vana1, $vana2, $vana3, $finishis);
       $kask->execute();
       $kask->fetch();
   
@@ -181,6 +182,14 @@
         
       }
 
+      //Finishis muutmine ei tööta millegipärast
+      if ($finishis != $lopeta && $lopeta != NULL) {
+        $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = ? WHERE id = $id");
+        $kask->bind_param("i", $lopeta);
+        $kask->execute();
+        
+      }
+
       if ($hinne1 > 0 && $hinne2 > 0 && $hinne3 > 0){
         $kask->close();
         $kask = $yhendus->prepare("UPDATE tantsuvoistlus SET finishis = 1 WHERE id = ?");
@@ -195,7 +204,7 @@
       }
     
 
-      $punktid = $hinne1 + $hinne2 + $hinne3; //et ei duubeldaks lahutad vanad puntktid ja siis lisad uued juhul kui nullitud vahepeal
+      $punktid = $hinne1 + $hinne2 + $hinne3;
       $vana1 = $hinne1;
       $vana2 = $hinne2;
       $vana3 = $hinne3;

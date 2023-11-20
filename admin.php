@@ -62,7 +62,7 @@ $kask=$yhendus->prepare("SELECT id, tantsija1, tantsija2, hinne1, hinne2, hinne3
           <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='5' name='loik3' placeholder='$hinne3' /></th>
           <th class='vasak'> $punkte </th>
           <th class='vasak'>". ($koht)."</th>
-          <th class='vasak'><a href='?eemalda_id=$id&tabel=$tabel'><button class='nupp'><i class='fa fa-home'></i>Disklaff</button></a></th>
+          <th class='vasak' ><input type='number' style='width: 50px;' min='0' max='1' name='lopeta' placeholder='$finishis' /></th>
           <th class='vasak'><button class='nupp' type='submit' value='submit'>Salvesta</button></th>
           </form>
           </tr><br>";
